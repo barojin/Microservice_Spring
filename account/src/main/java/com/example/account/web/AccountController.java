@@ -1,5 +1,6 @@
 package com.example.account.web;
 
+import com.example.account.exception.AccountNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,11 @@ public class AccountController {
     }
 
     @GetMapping("/accounts/{id}")
+    Account one(@PathVariable Long id){
+        return repository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
+    }
+
+    @PutMapping("/accounts/{id}")
     Account replaceAccount(@RequestBody Account newAccount, @PathVariable Long id){
         return repository.findById(id)
                 .map(account -> {
