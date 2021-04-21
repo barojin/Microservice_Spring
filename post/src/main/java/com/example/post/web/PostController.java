@@ -1,10 +1,10 @@
 package com.example.post.web;
 
-import java.util.List;
-
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -24,8 +24,18 @@ public class PostController {
         return this.discoveryClient.getInstances(applicationName);
     }
 
+    @GetMapping("/posts")
+    List<Post> all(){
+        return repository.findAll();
+    }
+
+    @GetMapping("/posts/{acct}")
+
+
     @PostMapping("/posts")
     void createPost(@RequestBody Post post) {
         Post newPost = repository.save(post);
     }
+
+
 }
