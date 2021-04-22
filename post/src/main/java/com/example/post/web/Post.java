@@ -2,25 +2,26 @@ package com.example.post.web;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     private String accountNumber;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String title;
     private String body;
 
     protected Post() {}
 
-    public Post(String accountNumber, String name, String title, String body) {
+    public Post(String accountNumber, String firstName, String lastName, String title, String body) {
         this.accountNumber = accountNumber;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.title = title;
         this.body = body;
     }
@@ -29,20 +30,48 @@ public class Post {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public String getName() {
-        return name;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getBody() {
         return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override
@@ -50,7 +79,8 @@ public class Post {
         return "Post{" +
                 "id=" + id +
                 ", accountNumber='" + accountNumber + '\'' +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
                 '}';

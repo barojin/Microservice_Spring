@@ -1,7 +1,6 @@
 package com.example.account.web;
 
 import com.example.account.exception.AccountNotFoundException;
-import org.hibernate.EntityMode;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -16,8 +15,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class AccountController {
-    private final AccountRepository repository;
 
+    private final AccountRepository repository;
     private final AccountModelAssembler assembler;
 
     public AccountController(AccountRepository repository, AccountModelAssembler assembler) {
@@ -27,8 +26,15 @@ public class AccountController {
 
     @GetMapping("/accounts")
     CollectionModel<EntityModel<Account>> all(){
-        List<EntityModel<Account>> accounts = repository.findAll().stream().map(assembler::toModel).collect(Collectors.toList());
+        List<EntityModel<Account>> accounts = repository.findAll().stream()
+                .map(assembler::toModel).collect(Collectors.toList());
         return CollectionModel.of(accounts, linkTo(methodOn(AccountController.class).all()).withSelfRel());
+    }
+
+    @GetMapping("/accounts/{id}")
+    EntityModel<Account> one(@PathVariable Long id){
+        Account account = repository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
+        return assembler.toModel(account);
     }
 
     @PostMapping("/accounts")
@@ -36,13 +42,6 @@ public class AccountController {
         EntityModel<Account> entityModel = assembler.toModel(repository.save(account));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
         // ResponseEntity create an HTTP 201 Created status message
-    }
-
-    @GetMapping("/accounts/{id}")
-    EntityModel<Account> one(@PathVariable Long id){
-        Account account = repository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
-
-        return assembler.toModel(account);
     }
 
     @PutMapping("/accounts/{id}")

@@ -21,8 +21,15 @@ public class PostApplication {
     @Bean
     CommandLineRunner initDB(PostRepository repository){
         return args -> {
-            log.info("Preloading " + repository.save(new Post("1234","Bilbo Baggins", "burglar","okay")));
-            log.info("Preloading " + repository.save(new Post("1235","Frodo" ,"Baggins", "thief")));
+            log.info("init: " + repository.save(new Post("1234","Yi", "Xuan", "haha", "good")));
+            log.info("init: " + repository.save(new Post("1234","Yi", "Xuan", "where", "are you going!")));
+            log.info("init: " + repository.save(new Post("1234","Yi", "Xuan", "what", "are you doing?")));
+            log.info("init: " + repository.save(new Post("2222","Hojin", "Nam", "something", "good")));
+            log.info("init: " + repository.save(new Post("3333","a", "b", "title", "this is the body content, fill me")));
+            log.info("init: " + repository.save(new Post("8888","c", "d", "title", "this is the body content, fill me")));
+            log.info("init: " + repository.save(new Post("9999","e", "f", "title", "this is the body content, fill me")));
+
+            log.info("find: "+ repository.findByAccountNumber("1234"));
         };
     }
 
