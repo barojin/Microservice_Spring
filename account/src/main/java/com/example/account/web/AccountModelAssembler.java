@@ -7,8 +7,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @Component
 public class AccountModelAssembler implements RepresentationModelAssembler<Account, EntityModel<Account>> {
+
     @Override
     public EntityModel<Account> toModel(Account entity) {
-        return EntityModel.of(entity, linkTo(methodOn(AccountController.class).one(entity.getId())).withSelfRel(), linkTo(methodOn(AccountController.class).all()).withRel("accounts"));
+        return EntityModel.of(entity,
+                linkTo(methodOn(AccountController.class).one(entity.getId())).withSelfRel(),
+                linkTo(methodOn(AccountController.class).all()).withRel("accounts"));
     }
 }

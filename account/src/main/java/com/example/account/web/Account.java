@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 
 @Entity
 public class Account {
-
-    private @Id @GeneratedValue Long id;
+    @Id @GeneratedValue
+    private Long id;
 
     private String accountNumber;
     private String firstName;
