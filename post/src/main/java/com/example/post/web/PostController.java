@@ -80,7 +80,7 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/posts/{acct}")
+    @GetMapping("/posts/account/{acct}")
     CollectionModel<EntityModel<Post>> postByAccount(@PathVariable String acct){
         List<EntityModel<Post>> posts = repository.findByAccountNumber(acct).stream()
                 .map(assembler::toModel).collect(Collectors.toList());
