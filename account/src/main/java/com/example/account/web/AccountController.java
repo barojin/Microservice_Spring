@@ -1,6 +1,8 @@
 package com.example.account.web;
 
 import com.example.account.exception.AccountNotFoundException;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -16,12 +18,19 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class AccountController {
 
+    private DiscoveryClient discoveryClient;
     private final AccountRepository repository;
     private final AccountModelAssembler assembler;
 
     public AccountController(AccountRepository repository, AccountModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
+    }
+
+    // resources/application.properties => spring.application.name=account-service
+    @RequestMapping("/{applicationName}")
+    public List<ServiceInstance> serviceInstancesByApplicationName(@PathVariable String applicationName){
+        return this.discoveryClient.getInstances(applicationName);
     }
 
     @GetMapping("/accounts")
