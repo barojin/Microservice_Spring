@@ -19,9 +19,11 @@ JVM:          11.0.10 (Amazon.com Inc. 11.0.10+9-LTS)
 OS:           Mac OS X 10.16 x86_64 = big ser 11.2.3  
 
 ## How to run on Mac OS
-Open 3 terminals on /eureka_server, /post, /account directory.
+Open 3 terminals on /eureka_server, /post, /account directory. <br>
+```
 $ export JAVA_HOME=`/usr/libexec/java_home -v 11`  
 $  ./gradlew run  
+```
 
 ### Reference: 
 Chapter 3. Interprocess communication in a microservice architecture by Chris Richardson Summary: https://docs.google.com/document/d/1N33vQcTGWu5-eEx0bDJTBiYX1tEpW66OTTiSwwJhf_o/edit?usp=sharing
