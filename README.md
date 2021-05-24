@@ -1,4 +1,11 @@
 # Microservice_Spring
+It has a two services Login and Post and one server Eureka.
+They were written using the Spring Boot, built with Gradle.
+Two services are in MVC framework, The server used the EurekaServer library.
+
+
+## Description
+
 
 ## Environment for Mac OS
 Gradle 6.8.1  
@@ -15,3 +22,5 @@ Open 3 terminals on /eureka_server, /post, /account directory.
 $ export JAVA_HOME=`/usr/libexec/java_home -v 11`  
 $  ./gradlew run  
 
+### Reference: 
+Chapter 3. Interprocess communication in a microservice architecture by Chris Richardson Summary: https://docs.google.com/document/d/1N33vQcTGWu5-eEx0bDJTBiYX1tEpW66OTTiSwwJhf_o/edit?usp=sharing
