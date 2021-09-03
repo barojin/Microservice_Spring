@@ -1,7 +1,7 @@
 # Microservice_Spring
 It has a two services Account and Post and one server Eureka.  
 They were written using the Spring Boot, built with Gradle.  
-Two services are in MVC framework, The server used the EurekaServer library.  
+Two services are made of Spring boot in MVC framework, and the service registry used the Netflix Eureka in Spring Cloud.
 
 ## Description
 Account service stores the user's information and has a function for the CRUD.   
